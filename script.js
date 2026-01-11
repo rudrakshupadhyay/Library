@@ -11,3 +11,12 @@ function addBookToLibrary(title,author,pages,read){
     let yourBook = new Book(id,title,author,pages,read);
     myLibrary.push(yourBook);
 }
+let add = document.querySelector(".add");
+let formContainer = document.querySelector(".formContainer");
+let removeForm = document.querySelector(".removeForm");
+add.addEventListener("click",() => {
+    formContainer.style.display = "block";
+});
+removeForm.addEventListener("click",() => {
+    formContainer.style.display = "none";
+});
