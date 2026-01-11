@@ -33,7 +33,6 @@ formContent.addEventListener("submit", function(e){
     renderLibrary()
     formContent.reset();
     formContainer.style.display = "none";
-    console.log(myLibrary);
 });
 function renderLibrary() {
     tbody.innerHTML = "";
