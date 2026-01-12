@@ -35,10 +35,18 @@ formContent.addEventListener("submit", function(e){
     formContainer.style.display = "none";
 });
 tbody.addEventListener("click",function(e){
-    if(e.target.className === "removeBookLib"){
+    if(e.target.className === "removeBookLib"){ // this way of className only valid for one class and give string for multile class use classList.contain()
         const eleid = e.target.dataset.id;
         const index = myLibrary.findIndex((book) => eleid === book.id);
         myLibrary.splice(index,1);
+        renderLibrary();
+    }
+});
+tbody.addEventListener("change",function(e){
+    if (e.target.classList.contains("statusCheckbox")) {
+        const idofele = e.target.dataset.id;
+        const book = myLibrary.find((b) => idofele === b.id);
+        book.read = e.target.checked ? "Read":"Unread";
         renderLibrary();
     }
 });
@@ -51,7 +59,7 @@ function renderLibrary() {
             <td>${book.title}</td>
             <td>${book.author}</td>
             <td>${book.pages}</td>
-            <td><input type="checkbox" checked> Read </td>
+            <td><input type="checkbox" class="statusCheckbox" data-id="${book.id}" checked> ${book.read} </td>
             <td><button class="removeBookLib" data-id="${book.id}">Delete</button></td>
             `;
         }
@@ -60,7 +68,7 @@ function renderLibrary() {
             <td>${book.title}</td>
             <td>${book.author}</td>
             <td>${book.pages}</td>
-            <td><input type="checkbox"> Read </td>
+            <td><input type="checkbox" class="statusCheckbox" data-id="${book.id}"> ${book.read} </td>
             <td><button class="removeBookLib" data-id="${book.id}">Delete</button></td>
             `;
         }
