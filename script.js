@@ -34,6 +34,14 @@ formContent.addEventListener("submit", function(e){
     formContent.reset();
     formContainer.style.display = "none";
 });
+tbody.addEventListener("click",function(e){
+    if(e.target.className === "removeBookLib"){
+        const eleid = e.target.dataset.id;
+        const index = myLibrary.findIndex((book) => eleid === book.id);
+        myLibrary.splice(index,1);
+        renderLibrary();
+    }
+});
 function renderLibrary() {
     tbody.innerHTML = "";
     myLibrary.forEach((book) => {
@@ -44,6 +52,7 @@ function renderLibrary() {
             <td>${book.author}</td>
             <td>${book.pages}</td>
             <td><input type="checkbox" checked> Read </td>
+            <td><button class="removeBookLib" data-id="${book.id}">Delete</button></td>
             `;
         }
         else{
@@ -52,6 +61,7 @@ function renderLibrary() {
             <td>${book.author}</td>
             <td>${book.pages}</td>
             <td><input type="checkbox"> Read </td>
+            <td><button class="removeBookLib" data-id="${book.id}">Delete</button></td>
             `;
         }
         tbody.appendChild(tr);
